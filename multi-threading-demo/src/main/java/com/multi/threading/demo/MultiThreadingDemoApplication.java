@@ -8,8 +8,6 @@ public class MultiThreadingDemoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MultiThreadingDemoApplication.class, args);
-		
-		//TODO
 	}
 
 }
