@@ -23,7 +23,7 @@ public class JsonPlaceholderApiService {
 	private JsonPlaceholderApiWebClient jsonPlaceholderApiWebClient;
 
 	@Autowired
-	private GetPostByIdAsyncExecutor executor;
+	private GetPostByIdAsyncExecutor multiThreadingExecutor;
 
 	public ResponseObjectData getPostById(final GetPostByIdReq apiRequest) {
 		final ResponseObjectData response = new ResponseObjectData();
@@ -33,7 +33,7 @@ public class JsonPlaceholderApiService {
 			final List<String> postids = Arrays.asList(StringUtils.split(apiRequest.getPostIds(), ","));
 			if (apiRequest.isDoMultiThreading()) {
 				postids.forEach(postid -> {
-					futurePostByIdResponses.add(executor.getPostById(postid));
+					futurePostByIdResponses.add(multiThreadingExecutor.getPostById(postid));
 				});
 				futurePostByIdResponses.forEach(futurePostById -> {
 					try {
